@@ -87,7 +87,7 @@
     function render(){
       const list = curCat==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===curCat);
       document.getElementById('catalog').innerHTML = list.map(p=>`
-        <article class="card"><div><div class="top"><span class="cat">${p.badge}</span><span class="price">${fmt(p.price)}</span></div>
+        <article class="card"><div><div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;font-weight:800;background:rgba(255,255,255,0.08);padding:3px 8px;border-radius:999px;">${p.badge}</span><span class="price">${fmt(p.price)}</span></div>
         <h3>${p.name}</h3><div class="sub">${p.sub}</div>
         <ul class="perks">${p.perks.map(x=>`<li>${x}</li>`).join('')}</ul></div>
         <div><button class="btn-buy" onclick="buyOne('${p.id}')">Comprar (Abrir Ticket)</button>
@@ -99,8 +99,8 @@
     function openCart(){ drawCart(); document.getElementById('cartModal').classList.add('open'); }
     function drawCart(){
       const el=document.getElementById('cartList'), tot=document.getElementById('cartTotal');
-      if(!cart.length){ el.innerHTML='<p style="color:#94a3b8;font-size:13px;">Carrinho vazio.</p>'; tot.textContent='Total: R$ 0,00'; return; }
-      el.innerHTML=cart.map(i=>`<div class="citem"><div><strong>${i.name}</strong><br/><span style="color:#34d399;font-size:12px;">${fmt(i.price*i.qty)}</span></div>
+      if(!cart.length){ el.innerHTML='<p style="color:#94a3b8;font-size:12px;">Carrinho vazio.</p>'; tot.textContent='Total: R$ 0,00'; return; }
+      el.innerHTML=cart.map(i=>`<div class="citem"><div><strong>${i.name}</strong><br/><span style="color:#34d399;">${fmt(i.price*i.qty)}</span></div>
         <div style="display:flex;gap:6px;align-items:center;"><button class="xbtn" onclick="chg('${i.id}',-1)">-</button><span>${i.qty}</span><button class="xbtn" onclick="chg('${i.id}',1)">+</button></div></div>`).join('');
       tot.textContent='Total: '+fmt(cart.reduce((a,b)=>a+b.price*b.qty,0));
     }
