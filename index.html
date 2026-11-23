@@ -1,393 +1,106 @@
-```html
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RP BAIANO (4GOD | 𝑽𝑩𝑨) — Loja Oficial</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            darkbg: '#090b10',
-            cardbg: '#111622',
-            cardhover: '#161d2d',
-            borderdark: '#1f283b',
-            discord: '#5865F2',
-            discordhover: '#4752C4',
-          },
-          boxShadow: {
-            'neon-blue': '0 0 25px -5px rgba(59, 130, 246, 0.35)',
-            'neon-gold': '0 0 25px -5px rgba(234, 179, 8, 0.35)',
-            'neon-ruby': '0 0 25px -5px rgba(244, 63, 94, 0.35)',
-            'neon-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.35)',
-            'neon-diamond': '0 0 28px -5px rgba(34, 211, 238, 0.45)',
-            'neon-discord': '0 0 25px -5px rgba(88, 101, 242, 0.5)',
-          }
-        }
-      }
-    };
-  </script>
   <style>
-    body {
-      background-color: #090b10;
-      color: #f3f4f6;
-      overflow-x: hidden;
+    :root {
+      --bg: #090b10;
+      --card: #121724;
+      --card2: #182032;
+      --border: #232d42;
+      --text: #f3f4f6;
+      --muted: #94a3b8;
+      --blue: #3b82f6;
+      --red: #ef4444;
+      --discord: #5865f2;
+      --green: #10b981;
+      --gold: #eab308;
     }
-    .bg-grid-pattern {
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 36px 36px;
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.45; }
+    .topbar { background: linear-gradient(90deg, #1d4ed8, #4f46e5, #dc2626); color: #fff; text-align: center; padding: 8px 12px; font-size: 12px; font-weight: 700; }
+    header { position: sticky; top: 0; z-index: 20; background: rgba(9,11,16,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 16px; }
+    .badge-4god { background: linear-gradient(135deg, #2563eb, #dc2626); padding: 7px 10px; border-radius: 10px; font-size: 12px; font-weight: 900; }
+    .vba { color: #60a5fa; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.35); padding: 2px 7px; border-radius: 6px; font-size: 12px; }
+    .actions { display: flex; gap: 8px; }
+    button { cursor: pointer; border: none; border-radius: 10px; font-weight: 700; transition: 0.15s; }
+    button:active { transform: scale(0.98); }
+    .btn-sec { background: var(--card); color: var(--text); border: 1px solid var(--border); padding: 9px 12px; font-size: 12px; }
+    .btn-cart { background: var(--blue); color: #fff; padding: 9px 14px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+    .count-pill { background: #fff; color: #1d4ed8; border-radius: 999px; padding: 1px 7px; font-size: 12px; font-weight: 900; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 20px 16px 60px; }
+    .hero { background: linear-gradient(135deg, #131b2e, #0e131f, #22121b); border: 1px solid var(--border); border-radius: 20px; padding: 22px; margin-bottom: 20px; }
+    .hero h1 { font-size: 26px; font-weight: 900; margin: 8px 0; }
+    .hero p { color: #cbd5e1; font-size: 14px; margin-bottom: 14px; }
+    .tag-bot { display: inline-block; background: rgba(88,101,242,0.2); color: #c7d2fe; border: 1px solid rgba(88,101,242,0.45); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 800; }
+    .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px; }
+    .filter-btn { background: var(--card); color: var(--muted); border: 1px solid var(--border); padding: 8px 14px; font-size: 12px; white-space: nowrap; }
+    .filter-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+    .card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .cat { font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: rgba(255,255,255,0.06); color: #e2e8f0; }
+    .price { font-size: 20px; font-weight: 900; color: #34d399; }
+    .card h3 { font-size: 18px; font-weight: 900; margin-top: 8px; }
+    .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .perks { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: #cbd5
+      <script>
+    const PRODUCTS = [
+      { id:'adv', cat:'servico', badge:'⚠️ SERVIÇO', name:'RETIRAR ADV', sub:'Abra ticket pra resgatar', price:15, perks:['Remoção de ADV via ticket','Análise da staff'] },
+      { id:'prata', cat:'vip', badge:'👑 VIP', name:'VIP PRATA', sub:'Plano inicial RP Baiano', price:15, perks:['Tag VIP Prata','Vantagens iniciais no RP'] },
+      { id:'ouro', cat:'vip', badge:'👑 VIP', name:'VIP OURO', sub:'Vantagens intermediárias', price:25, perks:['Tag VIP Ouro','Benefícios ampliados'] },
+      { id:'rubi', cat:'vip', badge:'💎 VIP', name:'VIP RUBI', sub:'Destaque na quebrada', price:35, perks:['Tag VIP Rubi','Vantagens extras no RP'] },
+      { id:'esmeralda', cat:'vip', badge:'💚 VIP', name:'VIP ESMERALDA', sub:'Alto nível de vantagens', price:50, perks:['Tag VIP Esmeralda','Pacote avançado'] },
+      { id:'diamante', cat:'vip', badge:'💠 VIP', name:'VIP DIAMANTE', sub:'Pacote VIP máximo', price:70, perks:['Tag VIP Diamante','Vantagens máximas'] },
+      { id:'fav-p', cat:'favela', badge:'🏚️ FAVELA', name:'FAVELA PEQUENA', sub:'Comando de favela pequena', price:20, perks:['Espaço de favela pequena','Setup via ticket 4GOD'] },
+      { id:'fav-g', cat:'favela', badge:'🏚️ FAVELA', name:'FAVELA GRANDE', sub:'Comando de favela grande', price:40, perks:['Espaço de favela grande','Maior porte via ticket 4GOD'] }
+    ];
+    let curCat='all', cart=JSON.parse(localStorage.getItem('vba_c')||'[]'), discUrl=localStorage.getItem('vba_d')||'https://discord.com/app', pending=[];
+    const fmt = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+    const toast = m => { const e=document.getElementById('toast'); e.textContent=m; e.classList.add('show'); setTimeout(()=>e.classList.remove('show'),2200); };
+    const closeM = id => document.getElementById(id).classList.remove('open');
+    function filterItems(c,b){ curCat=c; document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active')); if(b)b.classList.add('active'); render(); }
+    function render(){
+      const list = curCat==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===curCat);
+      document.getElementById('catalog').innerHTML = list.map(p=>`
+        <article class="card"><div><div class="top"><span class="cat">${p.badge}</span><span class="price">${fmt(p.price)}</span></div>
+        <h3>${p.name}</h3><div class="sub">${p.sub}</div>
+        <ul class="perks">${p.perks.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div><button class="btn-buy" onclick="buyOne('${p.id}')">Comprar (Abrir Ticket)</button>
+        <button class="btn-add" onclick="addCart('${p.id}')">+ Carrinho</button></div></article>`).join('');
     }
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+    function addCart(id){ const p=PRODUCTS.find(x=>x.id===id), f=cart.find(x=>x.id===id); if(f)f.qty++; else cart.push({id:p.id,name:p.name,price:p.price,qty:1}); localStorage.setItem('vba_c',JSON.stringify(cart)); badge(); toast(p.name+' adicionado!'); }
+    function chg(id,d){ const i=cart.find(x=>x.id===id); if(!i)return; i.qty+=d; if(i.qty<=0)cart=cart.filter(x=>x.id!==id); localStorage.setItem('vba_c',JSON.stringify(cart)); badge(); drawCart(); }
+    function badge(){ document.getElementById('cartCount').textContent=cart.reduce((a,b)=>a+b.qty,0); }
+    function openCart(){ drawCart(); document.getElementById('cartModal').classList.add('open'); }
+    function drawCart(){
+      const el=document.getElementById('cartList'), tot=document.getElementById('cartTotal');
+      if(!cart.length){ el.innerHTML='<p style="color:#94a3b8;font-size:13px;">Carrinho vazio.</p>'; tot.textContent='Total: R$ 0,00'; return; }
+      el.innerHTML=cart.map(i=>`<div class="citem"><div><strong>${i.name}</strong><br/><span style="color:#34d399;font-size:12px;">${fmt(i.price*i.qty)}</span></div>
+        <div style="display:flex;gap:6px;align-items:center;"><button class="xbtn" onclick="chg('${i.id}',-1)">-</button><span>${i.qty}</span><button class="xbtn" onclick="chg('${i.id}',1)">+</button></div></div>`).join('');
+      tot.textContent='Total: '+fmt(cart.reduce((a,b)=>a+b.price*b.qty,0));
     }
-    ::-webkit-scrollbar-track {
-      background: #090b10;
+    function checkout(){ if(!cart.length)return toast('Carrinho vazio!'); closeM('cartModal'); pending=[...cart]; updTicket(); document.getElementById('buyModal').classList.add('open'); }
+    function buyOne(id){ const p=PRODUCTS.find(x=>x.id===id); pending=[{id:p.id,name:p.name,price:p.price,qty:1}]; updTicket(); document.getElementById('buyModal').classList.add('open'); }
+    function updTicket(){
+      const nick=document.getElementById('nickRoblox').value.trim()||'Não informado', disc=document.getElementById('userDiscord').value.trim()||'Não informado';
+      const lines=pending.map(i=>`• ${i.name} (x${i.qty}) — ${fmt(i.price*i.qty)}`).join('\n');
+      const total=pending.reduce((a,b)=>a+b.price*b.qty,0);
+      document.getElementById('ticketText').textContent=`🎫 TICKET — RP BAIANO (4GOD | 𝑽𝑩𝑨)\nMarcados: @4.god @dapraça @max\n\n👤 Roblox: ${nick}\n💬 Discord: ${disc}\n🛒 Itens:\n${lines}\n💰 Total: ${fmt(total)}`;
     }
-    ::-webkit-scrollbar-thumb {
-      background: #1f283b;
-      border-radius: 9999px;
+    function goTicket(){
+      const txt=document.getElementById('ticketText').textContent;
+      if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).catch(()=>{});
+      toast('Copiado! Abrindo Discord...');
+      setTimeout(()=>window.open(discUrl,'_blank','noopener,noreferrer'),350);
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #334155;
-    }
-  </style>
-</head>
-<body class="bg-darkbg bg-grid-pattern min-h-screen flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
-
-  <!-- Top Alert Bar -->
-  <div class="bg-gradient-to-r from-blue-700 via-indigo-600 to-red-600 text-white text-xs sm:text-sm font-semibold py-2 px-4 text-center shadow-md">
-    <span>🇧🇦 LOJA OFICIAL RP BAIANO (4GOD | 𝑽𝑩𝑨) — Clicou em Comprar? </span>
-    <span class="underline decoration-yellow-300 decoration-2 font-extrabold">O BOT ABRE TICKET E MARCA @4.god @dapraça @max!</span>
-  </div>
-
-  <!-- Header / Navbar -->
-  <header class="sticky top-0 z-40 bg-darkbg/90 backdrop-blur-md border-b border-borderdark">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-      <!-- Brand -->
-      <a href="#" class="flex items-center gap-3 group shrink-0">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-600 via-slate-900 to-red-600 p-[2px] shadow-lg group-hover:scale-105 transition-transform">
-          <div class="w-full h-full bg-cardbg rounded-[10px] flex items-center justify-center font-black text-base tracking-tighter text-white">
-            4GOD
-          </div>
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="font-black text-lg sm:text-xl tracking-tight text-white">RP BAIANO</span>
-            <span class="px-2 py-0.5 text-xs font-extrabold rounded-md bg-blue-500/15 text-blue-400 border border-blue-500/30">𝑽𝑩𝑨</span>
-          </div>
-          <p class="text-[11px] sm:text-xs text-slate-400 font-medium">Loja Oficial • Roblox 🇧🇦</p>
-        </div>
-      </a>
-
-      <!-- Desktop Search -->
-      <div class="hidden md:flex flex-1 max-w-md mx-6">
-        <div class="relative w-full">
-          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
-          </svg>
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="Buscar VIP, Favela Grande, Retirar ADV..."
-            class="w-full bg-cardbg border border-borderdark focus:border-blue-500 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition-colors"
-          />
-        </div>
-      </div>
-
-      <!-- Actions -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <button
-          onclick="openBotSettingsModal()"
-          title="Configurar Link do Discord / Webhook do Bot"
-          class="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-cardbg hover:bg-cardhover border border-borderdark text-xs font-bold text-slate-300 transition-all"
-        >
-          <span>⚙️</span>
-          <span class="hidden lg:inline">Config. Bot Discord</span>
-        </button>
-
-        <button
-          onclick="toggleCart(true)"
-          class="relative inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm shadow-neon-blue transition-all"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <span class="hidden sm:inline">Carrinho</span>
-          <span id="cartBadge" class="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 text-xs font-black rounded-full bg-white text-blue-700">
-            0
-          </span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-
-    <!-- Hero Banner -->
-    <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#121829] via-[#0f1420] to-[#1a111d] border border-borderdark p-6 sm:p-10 mb-10 shadow-2xl">
-      <div class="absolute -top-24 -left-24 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-discord/15 border border-discord/40 text-indigo-300 text-xs font-extrabold uppercase tracking-wider mb-4">
-            <span>🤖</span>
-            <span>Integração Bot Discord • Marcação Automática</span>
-          </div>
-          <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight mb-4">
-            Domine a quebrada no <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-red-400">RP Baiano</span>
-          </h1>
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-            Garanta seu <strong class="text-white">VIP (Prata ao Diamante)</strong>, assuma o comando de uma <strong class="text-emerald-300">Favela Grande ou Pequena</strong> ou peça <strong class="text-amber-300">Retirar ADV</strong>. Ao clicar em <strong class="text-white">Comprar</strong>, o sistema prepara o ticket do Bot marcando <span class="px-1.5 py-0.5 rounded bg-discord/25 text-indigo-200 font-bold">@4.god @dapraça @max</span> e te leva direto pro Discord!
-          </p>
-          <div class="flex flex-wrap items-center gap-3">
-            <a
-              href="#catalogo"
-              class="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm shadow-neon-blue transition-all"
-            >
-              Ver Catálogo Completo
-            </a>
-            <button
-              onclick="openBotSettingsModal()"
-              class="px-5 py-3.5 rounded-xl bg-discord/20 hover:bg-discord/30 border border-discord/40 text-indigo-200 font-bold text-sm transition-all flex items-center gap-2"
-            >
-              <span>🤖</span>
-              <span>Link do Discord / Bot</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Live Bot Flow Preview Card -->
-        <div class="w-full lg:w-96 bg-[#0c0f17]/90 backdrop-blur-md border border-borderdark rounded-2xl p-5 space-y-3.5 shadow-xl">
-          <div class="flex items-center justify-between border-b border-borderdark pb-3">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span class="text-xs font-black uppercase tracking-wider text-white">Bot Ticket 4GOD • Online</span>
-            </div>
-            <span class="text-xs font-bold text-indigo-300 bg-discord/20 px-2 py-0.5 rounded-md">Auto-Ping</span>
-          </div>
-          <div class="bg-[#151924] border border-white/5 rounded-xl p-3.5 text-xs space-y-2">
-            <div class="flex items-center gap-2">
-              <span class="px-1.5 py-0.5 rounded bg-discord text-white font-black text-[10px]">BOT</span>
-              <span class="font-bold text-white">4GOD Tickets • 𝑽𝑩𝑨</span>
-            </div>
-            <p class="text-slate-300 leading-relaxed">
-              Novo pedido iniciado! Ticket aberto automaticamente para:
-            </p>
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2 py-0.5 rounded bg-discord/30 text-indigo-200 font-bold">@4.god</span>
-              <span class="px-2 py-0.5 rounded bg-discord/30 text-indigo-200 font-bold">@dapraça</span>
-              <span class="px-2 py-0.5 rounded bg-discord/30 text-indigo-200 font-bold">@max</span>
-            </div>
-          </div>
-          <p class="text-[11px] text-slate-400">
-            Clicou em <strong>Comprar</strong> em qualquer item? O pedido já vai copiado e pronto pra abrir no Discord.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Mobile Search & Category Filter Tabs -->
-    <section id="catalogo" class="mb-8 space-y-4">
-      <div class="md:hidden">
-        <input
-          id="mobileSearchInput"
-          type="text"
-          placeholder="Buscar VIP, Favela Grande, Retirar ADV..."
-          class="w-full bg-cardbg border border-borderdark focus:border-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
-        />
-      </div>
-
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        <div>
-          <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">Catálogo Oficial • RP Baiano (4GOD | 𝑽𝑩𝑨)</h2>
-          <p class="text-xs sm:text-sm text-slate-400">Clique em <strong class="text-white">Comprar Agora</strong> para acionar o ticket do Bot marcando <strong class="text-indigo-300">@4.god @dapraça @max</strong>.</p>
-        </div>
-
-        <!-- Category Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1">
-          <button
-            data-filter="all"
-            onclick="setFilter('all')"
-            class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white transition-all whitespace-nowrap"
-          >
-            Todos (8)
-          </button>
-          <button
-            data-filter="vip"
-            onclick="setFilter('vip')"
-            class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-cardbg text-slate-300 hover:bg-cardhover border border-borderdark transition-all whitespace-nowrap"
-          >
-            👑 Planos VIP
-          </button>
-          <button
-            data-filter="favela"
-            onclick="setFilter('favela')"
-            class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-cardbg text-slate-300 hover:bg-cardhover border border-borderdark transition-all whitespace-nowrap"
-          >
-            🏚️ Favelas
-          </button>
-          <button
-            data-filter="servico"
-            onclick="setFilter('servico')"
-            class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-cardbg text-slate-300 hover:bg-cardhover border border-borderdark transition-all whitespace-nowrap"
-          >
-            ⚠️ Serviços / ADV
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Products Grid -->
-    <section id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      <!-- Rendered dynamically by JS -->
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="border-t border-borderdark bg-cardbg/60 mt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-      <div>
-        <div class="flex items-center justify-center sm:justify-start gap-2 font-black text-white text-base">
-          <span>RP BAIANO (4GOD | 𝑽𝑩𝑨)</span>
-          <span>🇧🇦</span>
-        </div>
-        <p class="text-xs text-slate-400 mt-1">
-          Atendimento automático via Ticket no Discord com <span class="text-indigo-300 font-semibold">@4.god @dapraça @max</span>.
-        </p>
-      </div>
-      <div class="text-xs text-slate-500">
-        Servidor Roblox • Não afiliado oficialmente à Roblox Corporation.
-      </div>
-    </div>
-  </footer>
-
-  <!-- Instant Buy / Discord Ticket Bot Modal -->
-  <div id="ticketBotModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-    <div class="bg-cardbg border border-discord/50 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl relative my-auto">
-      <button
-        onclick="closeTicketBotModal()"
-        class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-center font-bold"
-        aria-label="Fechar"
-      >
-        ✕
-      </button>
-
-      <!-- Header -->
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-12 h-12 rounded-2xl bg-discord/20 border border-discord/40 flex items-center justify-center text-2xl shrink-0">
-          🤖
-        </div>
-        <div>
-          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-            Bot Ticket Ativado
-          </span>
-          <h3 class="text-xl font-black text-white mt-0.5">Abrir Ticket no Discord</h3>
-        </div>
-      </div>
-
-      <!-- Inputs -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-        <div>
-          <label for="instantRobloxNick" class="block text-xs font-bold text-slate-300 mb-1">Nick no Roblox</label>
-          <input
-            id="instantRobloxNick"
-            type="text"
-            oninput="refreshBotTicketPreview()"
-            placeholder="Ex: CriaBaiano_4GOD"
-            class="w-full bg-darkbg border border-borderdark focus:border-discord rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 outline-none"
-          />
-        </div>
-        <div>
-          <label for="instantDiscordUser" class="block text-xs font-bold text-slate-300 mb-1">Seu @ no Discord</label>
-          <input
-            id="instantDiscordUser"
-            type="text"
-            oninput="refreshBotTicketPreview()"
-            placeholder="Ex: @cria4god"
-            class="w-full bg-darkbg border border-borderdark focus:border-discord rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 outline-none"
-          />
-        </div>
-      </div>
-
-      <!-- Simulated Discord Bot Channel Preview -->
-      <div class="bg-[#0b0e14] border border-borderdark rounded-2xl p-4 mb-4 space-y-3">
-        <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2.5">
-          <span id="simChannelName" class="font-mono font-bold text-slate-300">#ticket-compra-4821</span>
-          <span class="text-[11px] text-emerald-400 font-bold">● Responsáveis marcados</span>
-        </div>
-
-        <!-- Bot Message -->
-        <div class="bg-[#141824] border-l-4 border-discord rounded-r-xl p-3.5 space-y-2">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="px-1.5 py-0.5 rounded bg-discord text-white font-black text-[10px]">BOT</span>
-              <span class="text-xs font-extrabold text-white">RP Baiano Tickets (4GOD | 𝑽𝑩𝑨)</span>
-            </div>
-            <span class="text-[10px] text-slate-400">Agora</span>
-          </div>
-
-          <pre id="botTicketMessagePreview" class="text-xs text-slate-200 whitespace-pre-wrap font-sans leading-relaxed"></pre>
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="space-y-2.5">
-        <button
-          onclick="launchDiscordWithTicket()"
-          class="w-full py-3.5 px-5 rounded-xl bg-discord hover:bg-discordhover active:scale-[0.99] text-white font-black text-sm shadow-neon-discord transition-all flex items-center justify-center gap-2.5"
-        >
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028z"/>
-          </svg>
-          <span>Copiar Ticket (@4.god @dapraça @max) & Abrir Discord</span>
-        </button>
-
-        <button
-          onclick="copyInstantTicketOnly()"
-          class="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 font-bold text-xs transition-all"
-        >
-          📋 Apenas Copiar Mensagem do Ticket
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Product Perks Details Modal -->
-  <div id="detailsModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="bg-cardbg border border-borderdark rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl relative">
-      <button
-        onclick="closeDetailsModal()"
-        class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-center font-bold"
-        aria-label="Fechar"
-      >
-        ✕
-      </button>
-
-      <div id="modalHeaderBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider mb-3"></div>
-      <h3 id="modalTitle" class="text-2xl font-black text-white mb-1"></h3>
-      <p id="modalSubtitle" class="text-xs font-bold text-amber-300 uppercase tracking-wide mb-4"></p>
-
-      <div class="bg-darkbg/80 border border-borderdark rounded-2xl p-4 mb-5">
-        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">O que está incluso:</p>
-        <ul id="modalPerksList" class="space-y-2.5 text-sm text-slate-200"></ul>
-      </div>
-
-      <div class="bg-discord/15 border border-discord/35 rounded-xl p-3.5 mb-5 flex items-start gap-3">
-        <span class="text-lg">🤖</span>
-        <p class="text-xs text-indigo-200 le
+    function openConfig(){ document.getElementById('discInput').value=discUrl==='https://discord.com/app'?'':discUrl; document.getElementById('configModal').classList.add('open'); }
+    function saveDisc(){ discUrl=document.getElementById('discInput').value.trim()||'https://discord.com/app'; localStorage.setItem('vba_d',discUrl); closeM('configModal'); toast('Salvo!'); }
+    render(); badge();
+  </script>
+</body>
+</html>
+    
